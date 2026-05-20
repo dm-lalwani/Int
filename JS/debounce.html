@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debounce in JS</title>
+</head>
+<body>
+    <input type="text" id="search" placeholder="Type to search..." onkeyup="debounceFunction()">
+    <script>
+      let counter = 0;
+      function getData(){
+        console.log("Fetching data..." + counter++);
+      }
+
+      function debounce(func, delay){
+        let timer;
+        return function(){
+          const context = this;
+          const args = arguments;
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            func.apply(context, args); 
+          }, delay)
+        }
+      }
+
+      const debounceFunction = debounce(getData, 500)
+    </script>
+</body>
+</html> 
