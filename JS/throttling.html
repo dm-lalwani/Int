@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Throttling Example</title>
+</head>
+<body>
+  <h1>Throttling Example</h1>
+  <p>Resize the window to see the throttled function in action. The expensive operation
+    <script>
+      // 1. An expensive function that we want to throttle
+        const expensive = () => {
+          console.log("Expensive operation executed...");
+        };
+
+        // 2. The Throttling polyfill function
+        const throttle = (func, limit) => {
+          let flag = true; // Flag to track execution state
+
+          // Closure to track the environment variables (like 'flag', 'context', and 'args')
+          return function (...args) {
+            let context = this; // Preserving 'this' context
+
+            if (flag) {
+              // Execute the inner function with proper context and arguments
+              func.apply(context, args);
+              flag = false; // Close the gate for subsequent rapid events
+
+              // Open the gate only after the specified time limit passes
+              setTimeout(() => {
+                flag = true;
+              }, limit);
+            }
+          };
+        };
+
+        // 3. Wrapping the expensive function with a 1000ms (1 second) throttle interval
+        const betterExpensive = throttle(expensive, 5000);
+
+        // 4. Testing with a continuous event listener
+        window.addEventListener("resize", betterExpensive);
+    </script>
+</body>
+</html>
+

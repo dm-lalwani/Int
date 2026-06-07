@@ -21,7 +21,20 @@
       },
     }
 
-    function fun() { }
+    Function.prototype.greet = function () {
+      console.log("Hello" + this.name);
+    }
+
+    function fun() { } // any function will have access to greet method because of prototype
+
+    // Protoypal Inheritance
+
+    let obj2 = {
+      name: "Mahesh",
+    }
+
+    // Never do this in real code, this is just for demonstration
+    obj2.__proto__ = obj; // obj2 inherits from obj
   </script>
 </body>
 
