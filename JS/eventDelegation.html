@@ -31,7 +31,7 @@
     const form = document.getElementById('form');
     form.addEventListener('keyup', (event) => {
       const target = event.target;
-      if (target.dataset.uppercase !== undefined) {
+      if (target.dataset.uppercase !== undefined) { // Check if the input has the data-uppercase attribute
         target.value = target.value.toUpperCase();
       }
     });

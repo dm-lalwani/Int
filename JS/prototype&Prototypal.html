@@ -29,12 +29,16 @@
 
     // Protoypal Inheritance
 
-    let obj2 = {
-      name: "Mahesh",
-    }
+    // let obj2 = {
+    //   name: "Mahesh",
+    // }
 
     // Never do this in real code, this is just for demonstration
-    obj2.__proto__ = obj; // obj2 inherits from obj
+    // obj2.__proto__ = obj; // obj2 inherits from obj
+
+    //Production level code
+    let obj2 = Object.create(obj); // obj2 inherits from obj
+    obj2.name = "Mahesh"; // obj2 has its own name property, but it can also access properties of obj
   </script>
 </body>
 
